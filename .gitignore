@@ -6,3 +6,5 @@
 *.duckdb.wal
 logs/
 __pycache__/
+.apd_token
+*.token

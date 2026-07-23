@@ -15,8 +15,9 @@ Usage:
 
 First-grant auto-backfill: a sensor whose token is granted but which has zero
 archived observations (i.e., its approval just landed) automatically gets a
-AUTO_BACKFILL_DAYS temporal pull on that run — the days spent waiting for the
-provider are recovered without anyone noticing the approval happened.
+temporal pull covering the WHOLE approval wait — anchored to the sensor's
+earliest access_log entry, clamped to [MIN_BACKFILL_DAYS, MAX_BACKFILL_DAYS].
+A slow provider loses nothing (up to the cap); `--temporal N` overrides.
 
 Credentials: .env beside this file (IUDX_CLIENT_ID / IUDX_CLIENT_SECRET),
 gitignored, chmod 600. Do not point this at ~/Downloads — macOS TCC denies
@@ -24,6 +25,7 @@ launchd access there.
 """
 import argparse
 import json
+import math
 import os
 import sys
 import time
@@ -45,8 +47,11 @@ RS = "https://rs.cos.iudx.org.in/ngsi-ld/v1"
 
 UA = "iudx-flood-collector/0.1"
 
-# days to temporal-backfill a sensor the first time its token is granted
-AUTO_BACKFILL_DAYS = 7
+# first-grant backfill bounds: reach back to when we first started trying this
+# sensor (its earliest access_log entry — i.e., the whole approval wait), but
+# never less than a week and never more than the RS is likely to serve.
+MIN_BACKFILL_DAYS = 7
+MAX_BACKFILL_DAYS = 30
 
 
 # ---------------------------------------------------------------- helpers
@@ -203,6 +208,26 @@ def pull_latest(token, resource_id):
     return d.get("results", [])
 
 
+def backfill_days(con, resource_id, now):
+    """Dynamic first-grant backfill depth: cover the whole approval wait.
+
+    Anchored to the sensor's earliest access_log entry (the first time this
+    collector ever tried it), clamped to [MIN_BACKFILL_DAYS, MAX_BACKFILL_DAYS].
+    """
+    first_try = con.execute(
+        "SELECT min(run_ts) FROM access_log WHERE resource_id=?", [resource_id]
+    ).fetchone()[0]
+    if first_try is None:
+        return MIN_BACKFILL_DAYS
+    if first_try.tzinfo is None:
+        # duckdb stores our aware-UTC inserts as LOCAL-naive (verified: the
+        # 03:21 UTC run reads back as 08:51 IST) — reattach the local zone,
+        # not UTC, or every wait is undercounted by the UTC offset
+        first_try = first_try.replace(tzinfo=datetime.now().astimezone().tzinfo)
+    waited = math.ceil((now - first_try).total_seconds() / 86400)
+    return max(MIN_BACKFILL_DAYS, min(waited, MAX_BACKFILL_DAYS))
+
+
 def pull_temporal(token, resource_id, days):
     end = datetime.now(timezone.utc)
     start = end - timedelta(days=days)
@@ -280,7 +305,7 @@ def main():
                     "SELECT count(*) FROM observations WHERE resource_id=?", [rid]
                 ).fetchone()[0]
                 if n_prior == 0:
-                    days = AUTO_BACKFILL_DAYS
+                    days = backfill_days(con, rid, now)
                     print(f"  first grant for {rid[:8]}… — backfilling {days}d")
             if days:
                 recs += pull_temporal(tok, rid, days)

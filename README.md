@@ -39,8 +39,11 @@ python3 collector.py --coverage     # access report only
 
 **First-grant auto-backfill**: when a provider approves and a sensor's token is
 granted for the first time (zero archived rows), that run automatically pulls a
-7-day temporal backfill (`AUTO_BACKFILL_DAYS`) — the approval-wait window is
-recovered without manual intervention. `--temporal N` overrides the depth.
+temporal backfill covering the **whole approval wait** — anchored to the
+sensor's earliest `access_log` entry, clamped to 7–30 days
+(`MIN_BACKFILL_DAYS`/`MAX_BACKFILL_DAYS`; the cap because resource servers
+bound temporal query ranges). A slow provider loses nothing up to the cap.
+`--temporal N` overrides the depth.
 
 Use `/usr/bin/python3` (has duckdb) — the Homebrew python does not.
 

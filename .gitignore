@@ -1,0 +1,8 @@
+# machine-local secrets — real creds never leave this machine
+.env
+# runtime state
+.tokens.json
+*.duckdb
+*.duckdb.wal
+logs/
+__pycache__/

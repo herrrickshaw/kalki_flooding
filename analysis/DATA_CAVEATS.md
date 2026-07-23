@@ -37,3 +37,12 @@ convective bursts. Treat low decade bars as "no widespread heavy rain", not
 - Bengaluru waterlogging event feed: reporting gap Mar–Jul 2025 (6–31
   events/month of all types vs hundreds in monsoon 2024) — 2025 event counts
   understate reality; news-verified (2025-05-19 flood absent from feed).
+
+## Pune station series (the usable Pune record)
+`data/city_daily_pune_station.csv` = GHCN-Daily "POONA" IN012190100 (1901-72)
++ NOAA GSOD 43063099999 (1973-2025), both the IMD Pune observatory (WMO
+43063). QC: GSOD carries recurring garbage dailies (18.58 in = 471.9 mm
+appears 1983/1998/2023; 405 mm on a November day) — values >198.5 mm
+(1.5× the verified GHCN-era max of 132.3 mm) are rejected; 7 dropped.
+GSOD days are 00-00 UTC vs IMD's 08:30 IST — single-day extremes can shift
+a date. 1975 is incomplete (277 d) and auto-excluded by the ≥300-day rule.

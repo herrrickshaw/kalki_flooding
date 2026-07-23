@@ -164,9 +164,26 @@ def main():
             return
 
     refresh_years([year - 1, year])
+    # Pune STATION series (GSOD, the usable Pune record — grid cell is
+    # artifact-ridden): append/refresh the two newest years the same way
+    sys.path.insert(0, str(ANALYSIS))
+    from pune_station_series import fetch_gsod
+    p = DATA / "city_daily_pune_station.csv"
+    kept = [r for r in csv.reader(open(p))
+            if r and (r[0] == "date"
+                      or not r[0].startswith((str(year - 1), str(year))))]
+    fresh = []
+    for y in (year - 1, year):
+        fresh += [[d, "pune_station", v] for d, v in sorted(fetch_gsod(y).items())]
+    with open(p, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerows(kept)
+        w.writerows(fresh)
+    print(f"pune_station: refreshed {year - 1}-{year} ({len(fresh)} rows)")
+
     subprocess.run([VENV_PY, str(ANALYSIS / "city_rain_metrics.py")],
                    cwd=str(ANALYSIS), check=True)
-    for fn in ("city_daily.csv", "city_daily_more.csv"):
+    for fn in ("city_daily.csv", "city_daily_more.csv", "city_daily_pune_station.csv"):
         subprocess.run(["rclone", "copyto", str(DATA / fn), f"{REMOTE}/{fn}"],
                        check=True)
     if not args.no_mail:

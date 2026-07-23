@@ -10,8 +10,13 @@ the durable asset (same thesis as the bhavcopy archive).
 
 Usage:
     python3 collector.py                 # catalog refresh + latest pull
-    python3 collector.py --temporal 7    # also backfill last N days (temporal API)
+    python3 collector.py --temporal 7    # force-backfill last N days for ALL granted sensors
     python3 collector.py --coverage      # print access-coverage report only
+
+First-grant auto-backfill: a sensor whose token is granted but which has zero
+archived observations (i.e., its approval just landed) automatically gets a
+AUTO_BACKFILL_DAYS temporal pull on that run — the days spent waiting for the
+provider are recovered without anyone noticing the approval happened.
 
 Credentials: .env beside this file (IUDX_CLIENT_ID / IUDX_CLIENT_SECRET),
 gitignored, chmod 600. Do not point this at ~/Downloads — macOS TCC denies
@@ -39,6 +44,9 @@ AAA = "https://authorization.iudx.org.in/auth/v1"
 RS = "https://rs.cos.iudx.org.in/ngsi-ld/v1"
 
 UA = "iudx-flood-collector/0.1"
+
+# days to temporal-backfill a sensor the first time its token is granted
+AUTO_BACKFILL_DAYS = 7
 
 
 # ---------------------------------------------------------------- helpers
@@ -264,8 +272,18 @@ def main():
         )
         try:
             recs = pull_latest(tok, rid)
-            if args.temporal:
-                recs += pull_temporal(tok, rid, args.temporal)
+            # explicit --temporal wins; otherwise first grant (no archived rows
+            # yet) triggers the automatic backfill of the approval-wait window
+            days = args.temporal
+            if not days:
+                n_prior = con.execute(
+                    "SELECT count(*) FROM observations WHERE resource_id=?", [rid]
+                ).fetchone()[0]
+                if n_prior == 0:
+                    days = AUTO_BACKFILL_DAYS
+                    print(f"  first grant for {rid[:8]}… — backfilling {days}d")
+            if days:
+                recs += pull_temporal(tok, rid, days)
             added = store_observations(con, rid, recs, now)
             rows_added += added
             con.execute(

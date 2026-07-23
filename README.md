@@ -33,9 +33,14 @@ flows only after each provider grants a consumer policy (see below).
 
 ```bash
 python3 collector.py                # daily pull
-python3 collector.py --temporal 7   # + backfill last 7 days
+python3 collector.py --temporal 7   # force 7-day backfill for all granted sensors
 python3 collector.py --coverage     # access report only
 ```
+
+**First-grant auto-backfill**: when a provider approves and a sensor's token is
+granted for the first time (zero archived rows), that run automatically pulls a
+7-day temporal backfill (`AUTO_BACKFILL_DAYS`) — the approval-wait window is
+recovered without manual intervention. `--temporal N` overrides the depth.
 
 Use `/usr/bin/python3` (has duckdb) — the Homebrew python does not.
 

@@ -14,7 +14,7 @@ Metrics per city-year, using IMD's official daily-intensity categories:
   extremely_heavy_days ≥ 204.5 mm  (IMD "extremely heavy")
   max_1day_mm          wettest single day
 
-Usage: python3 city_rain_metrics.py /path/to/city_daily.csv
+Usage: python3 city_rain_metrics.py [csv ...]   (default: data/city_daily*.csv)
 """
 import csv
 import sys
@@ -27,7 +27,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 BASE = Path(__file__).resolve().parent
-SRC = Path(sys.argv[1]) if len(sys.argv) > 1 else BASE / "data" / "city_daily.csv"
+SRCS = ([Path(p) for p in sys.argv[1:]]
+        or sorted((BASE / "data").glob("city_daily*.csv")))
 
 BLUE, ORANGE = "#2a78d6", "#eb6834"
 INK, INK2, GRID, SURFACE = "#0b0b0b", "#52514e", "#e5e4e0", "#fcfcfb"
@@ -47,7 +48,8 @@ def main():
     acc = defaultdict(lambda: {"annual": 0.0, "jjas": 0.0, "ond": 0.0, "rainy": 0,
                                "heavy": 0, "very_heavy": 0, "extremely_heavy": 0,
                                "max1d": 0.0, "days": 0})
-    with open(SRC) as f:
+    for src in SRCS:
+      with open(src) as f:
         for r in csv.DictReader(f):
             y, m = int(r["date"][:4]), int(r["date"][5:7])
             mm = float(r["rain_mm"])
@@ -95,9 +97,14 @@ def main():
                 for i in range(len(vals))]
 
     # ---- monsoon totals: each city gets ITS monsoon
-    fig, axes = plt.subplots(len(cities), 1, figsize=(9, 3.2 * len(cities)), dpi=150)
+    import math as _m
+    ncols = 2 if len(cities) > 3 else 1
+    nrows = _m.ceil(len(cities) / ncols)
+    fig, axes = plt.subplots(nrows, ncols, figsize=(7.5 * ncols, 2.6 * nrows), dpi=150)
     fig.patch.set_facecolor(SURFACE)
-    axes = axes if len(cities) > 1 else [axes]
+    axes = [a for row in (axes if nrows > 1 else [axes]) for a in (row if ncols > 1 else [row])]
+    for ax in axes[len(cities):]:
+        ax.axis("off")
     season = {"bengaluru": ("jjas", "SW monsoon Jun–Sep"),
               "chennai": ("ond", "NE monsoon Oct–Dec")}
     for ax, city in zip(axes, cities):
@@ -112,9 +119,13 @@ def main():
     plt.close(fig)
 
     # ---- extreme days (heavy ≥64.5) per decade, per city
-    fig, axes = plt.subplots(len(cities), 1, figsize=(9, 3.0 * len(cities)), dpi=150)
+    ncols = 2 if len(cities) > 3 else 1
+    nrows = _m.ceil(len(cities) / ncols)
+    fig, axes = plt.subplots(nrows, ncols, figsize=(7.5 * ncols, 2.5 * nrows), dpi=150)
     fig.patch.set_facecolor(SURFACE)
-    axes = axes if len(cities) > 1 else [axes]
+    axes = [a for row in (axes if nrows > 1 else [axes]) for a in (row if ncols > 1 else [row])]
+    for ax in axes[len(cities):]:
+        ax.axis("off")
     for ax, city in zip(axes, cities):
         dec = defaultdict(int)
         for (c, y) in acc:

@@ -1,0 +1,74 @@
+city,sensor,category,watches,lon,lat
+chennai,FM_Box1_Duraisamy_Subway,Road underpass,,80.228923,13.041221
+chennai,FM_Box1_Ezhil_Nagar_Jn_Kodungaiyur_Canal,Canal / drain,,80.273578,13.125275
+chennai,FM_Box1_Gengu_Reddy_Subway,Road underpass,,80.25196,13.07688
+chennai,FM_Box1_Jones_Road_Subway,Road underpass,,80.22435,13.02527
+chennai,FM_Box1_Kaliyamman_Kovil_St_Virugambakkam_Canal,Canal / drain,,80.196609,13.060795
+chennai,FM_Box1_Kargil_Nagar,Other low-lying,,80.29038,13.17324
+chennai,FM_Box1_Kathivakkam_High_Road,Other low-lying,,80.31769,13.20582
+chennai,FM_Box1_Korattur_North_Canal_Lake,Canal / drain,,80.18041,13.11043
+chennai,FM_Box1_Mambalam_Canal_CIT_Nagar,Canal / drain,,80.23085,13.030476
+chennai,FM_Box1_Mount_Subway,Road underpass,,80.20116,12.99546
+chennai,FM_Box1_Mylapore_Canal,Canal / drain,,80.266598,13.034779
+chennai,FM_Box1_Nandambakkam_Canal_Behind_DLF_LT,Canal / drain,,80.181998,13.022169
+chennai,FM_Box1_Nandambakkam_Canal_MIOT,Canal / drain,,80.186857,13.019091
+chennai,FM_Box1_Nungambakkam_subway,Road underpass,,80.23282,13.06602
+chennai,FM_Box1_Padi_Kuppam_Canal,Canal / drain,,80.189724,13.079462
+chennai,FM_Box1_Perambur_High_Road_Subway,Road underpass,,80.241835,13.106845
+chennai,FM_Box1_RBI_Subway,Road underpass,,80.289148,13.085527
+chennai,FM_Box1_Spenzer_Plaza_Canal,Canal / drain,,80.260278,13.063734
+chennai,FM_Box1_Stephenson_Bridge_Otteri_Nullah_Canal,Canal / drain,,80.251382,13.098093
+chennai,FM_Box1_Veerangal_Odai_Near_Puzhuthivakkam,Canal / drain,,80.216859,12.967108
+chennai,FM_Box1_Villivakkam_Subway,Road underpass,,80.206363,13.109932
+chennai,FM_Box2_Kathivakkam_High_Road,Other low-lying,,80.31769,13.20582
+chennai,FM_Box2_Manickam_Nagar_Subway,Road underpass,,80.30275,13.17295
+chennai,FM_Box2_Mc_Road_Subway_Stanley_Hospital,Road underpass,,80.286109,13.10723
+chennai,FM_Box2_Stanley_Nagar_Subway,Road underpass,,80.27246,13.1067
+chennai,FM_Box2_Vyasarpadi_Subway,Road underpass,,80.26648,13.10977
+chennai,FM_Box_RangarajaPuram_Subway,Road underpass,,80.230106,13.045743
+pune,FWR013,Nala / drain / lake,"Bhairoba Nala Cantonment Area ,Pune",73.895526,18.489382
+pune,FWR015,Nala / drain / lake,"Kalash ,On the Nala Bridge,Pune",73.873011,18.581647
+pune,FWR016,Locality hotspot,"Indira Nagar slum and Maharishi Nagar ,Pune",73.863825,18.4918
+pune,FWR017,Locality hotspot,"Uttam Nagar Indiranagar(Anaganwadi) ,Pune",73.774537,18.46013
+pune,FWR018,Nala / drain / lake,"Pashan Bopodi Nala ,Pune",73.791175,18.536285
+pune,FWR019,Locality hotspot,"Datta nagar,Baner road ,near Balewadi Cross",73.78405,18.56235
+pune,FWR020,Locality hotspot,"Someshwar Wadi  ,Pune",73.798225,18.54708
+pune,FWR021,Locality hotspot,"Near Indiranagar Slum on Alandi Road ,Yerawada,Pune",73.873944,18.558611
+pune,FWR022,River (bridge gauge),"On the Bridge near Prayeja City,Sinhgad Road,Pune",73.81497,18.467078
+pune,FWR023,Nala / drain / lake,"Vishranthawadi Nala, Near Banana Leaf Hotel,Pune",73.87652,18.57595
+pune,FWR024,Nala / drain / lake,"Ektanagar Nale/Nala Sangam,Sinhgad Road",73.822295,18.480676
+pune,FWR025,River (bridge gauge),"Ram River Crossing,Bavdhan",73.77026,18.51329
+pune,FWR026,Nala / drain / lake,"Ambil Odha,Treasure Park Society",73.852952,18.481732
+pune,FWR030,River (bridge gauge),"Pratibha Tai Pawar School,Ambedkar Nagar Bridge, Kondhwa Khurd",73.887711,18.455577
+pune,FWR033,River (bridge gauge),"Tank Road Bridge on Mula River,near Shanthinagar, Pune",73.87351,18.56875
+pune,FWR034,Nala / drain / lake,"Canal Bridge Hingne Khurd, Pune",73.8318,18.478267
+pune,FWR035,River (bridge gauge),"Sambhaji Bridge,Pune",73.84296,18.513477
+pune,FWR036,Locality hotspot,"KK Market Road,KK Market",73.861,18.4691
+pune,FWR037,Locality hotspot,"Patil Hospital,Sinhgad Road",73.824593,18.479271
+pune,FWR039,Locality hotspot,"Dhudhbhatti, Ganesh Peth",73.861964,18.518623
+pune,FWR044,Locality hotspot,Juna Dattawadi,73.850911,18.499747
+pune,FWR045,Nala / drain / lake,"Gaymukh,Jambhulwadi Talav",73.839582,18.448922
+pune,FWR046,River (bridge gauge),Kharadi Samshambhumi,73.948909,18.548194
+pune,FWR047,Locality hotspot,"Gururaj Socierty, Satara Road ,opp to Chavannagar",73.857543,18.47424
+pune,FWR048,River (bridge gauge),"Maharishi Shinde Bridge on Mutha River,near Balagandharv Rangamandir , Pune",73.8494,18.52085
+pune,FWR049,River (bridge gauge),"Holkar Bridge,Pune",73.8604,18.52962
+pune,FWR050,Locality hotspot,"Hadapsar Mundhwa,Pune",73.933558,18.535548
+pune,FWR051,River (bridge gauge),"On Bridge over Mula River,Pune",73.8559,18.5325
+pune,FWR052,River (bridge gauge),"On Mula River,Aundh BRTS Ravet Road,Pune",73.81145,18.56794
+pune,FWR053,River (bridge gauge),"On Mula River,Near Deccan College Road,Pune",73.863551,18.554551
+pune,FWR054,River (bridge gauge),"On Bridge over Pawana River,Priyadarshni Nagar, Dapodi,Pune",73.8261,18.576225
+pune,FWR055,River (bridge gauge),"On Mutha River,Near Vithoba Park,Pune",73.82772,18.488375
+pune,FWR056,River (bridge gauge),"On Mutha River,Pune",73.83652,18.504515
+pune,FWR057,Nala / drain / lake,"On Nala Bridge near Alankar Pool Road/Police Station,Pune",73.82698,18.49852
+pune,FWR058,River (bridge gauge),"Bridge over Mula River,Balewadi-Hinjawadi Road,Pune",73.75921,18.587
+pune,FWR059,River (bridge gauge),"On bridge over Mutha River,Chauk-Karjat-Murbad Road,Anand Nagar, Pune",73.80939,18.47449
+pune,FWR060,River (bridge gauge),"On Mula River, Old Sangvi Bopodi Road,Pune",73.83292,18.573785
+pune,FWR061,Nala / drain / lake,"On Canal Road Bridge near Vardhaman Petrol Pump ,Warje,Pune",73.80282,18.483555
+pune,FWR063,River (bridge gauge),"On Bridge over Mula Mutha River,East Ave,Koregaon Park,Pune",73.904219,18.541038
+pune,FWR064,River (bridge gauge),"Near Bund Garden Bandhara,Mula-Mutha River, Pune",73.8836,18.5432
+pune,FWR065,Locality hotspot,"Near Pratik Nagar Chowk,Pune",73.87749,18.56908
+pune,FWR066,Nala / drain / lake,Katraj Upper Lake,73.86131,18.444614
+pune,FWR067,Nala / drain / lake,Chandramani Nala,73.828951,18.562762
+pune,FWR068,Locality hotspot,Vikas Nagar Ghorpadi,73.901408,18.52438
+pune,FWR069,Nala / drain / lake,"Ambil Oda Padmawati Bridge,Satara Road",73.822295,18.476596
+pune,FWR070,Nala / drain / lake,Lake Town Society Bridge,73.863522,18.459801

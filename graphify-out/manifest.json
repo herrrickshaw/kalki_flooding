@@ -1,0 +1,128 @@
+{
+  "analysis/bengaluru_flood_road.py": {
+    "mtime": 1784786837.2895916,
+    "seen": 1789193309.1826172,
+    "ast_hash": "0eb4fe63d91dae6369f4b5e0ccb73ed0",
+    "semantic_hash": ""
+  },
+  "analysis/city_rain_metrics.py": {
+    "mtime": 1784802440.1880202,
+    "seen": 1789193309.1826198,
+    "ast_hash": "7372f693a62804524c3cf8bb23af5a38",
+    "semantic_hash": ""
+  },
+  "analysis/data/bengaluru_waterlogging.json": {
+    "mtime": 1784802133.5247774,
+    "seen": 1789193309.182622,
+    "ast_hash": "d42aa3076e63f396955792a457d8a000",
+    "semantic_hash": ""
+  },
+  "analysis/deployment_patterns.py": {
+    "mtime": 1784779399.85502,
+    "seen": 1789193309.182623,
+    "ast_hash": "6df7a92abe003cf044f50469c668e2e9",
+    "semantic_hash": ""
+  },
+  "analysis/pune_station_series.py": {
+    "mtime": 1784810068.465888,
+    "seen": 1789193309.182624,
+    "ast_hash": "6e4c25c506544c2f09c6d9862c5be401",
+    "semantic_hash": ""
+  },
+  "analysis/rain_event_correlation.py": {
+    "mtime": 1784802305.9388258,
+    "seen": 1789193309.182624,
+    "ast_hash": "0bbb64bba2f6b0a685d9f8df5699a647",
+    "semantic_hash": ""
+  },
+  "annual_refresh.py": {
+    "mtime": 1784805188.134632,
+    "seen": 1789193309.182625,
+    "ast_hash": "4853afb4a62cc0e259f21d2d80a29dcd",
+    "semantic_hash": ""
+  },
+  "collector.py": {
+    "mtime": 1784786361.1350138,
+    "seen": 1789193309.182626,
+    "ast_hash": "87a0ba89388be6a5bbe7c7dad74f538d",
+    "semantic_hash": ""
+  },
+  "request_access.py": {
+    "mtime": 1784777493.4028974,
+    "seen": 1789193309.182627,
+    "ast_hash": "7c94dc786f380e2235c746bd462a8ab8",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1789402247.6799386,
+    "seen": 1789968741.492519,
+    "ast_hash": "85c1d7bdb0ee1a872e0976106662a3bc",
+    "semantic_hash": ""
+  },
+  "analysis/DATA_CAVEATS.md": {
+    "mtime": 1784810117.0630798,
+    "seen": 1789193309.1826282,
+    "ast_hash": "604cfd730cab12e1633090b8727e092b",
+    "semantic_hash": ""
+  },
+  "analysis/bengaluru_flood_road_map.png": {
+    "mtime": 1784786843.3216176,
+    "seen": 1789193309.182629,
+    "ast_hash": "e251e41ca648e4c3959d519f80e5f15f",
+    "semantic_hash": ""
+  },
+  "analysis/chennai_map.png": {
+    "mtime": 1784779400.7717593,
+    "seen": 1789193309.182629,
+    "ast_hash": "95e7e4839bb78bbf092d36d8d56d380b",
+    "semantic_hash": ""
+  },
+  "analysis/city_extreme_days.png": {
+    "mtime": 1784810071.9672246,
+    "seen": 1789193309.1826298,
+    "ast_hash": "78ef61d3f1574cb7ee7d95df68735d87",
+    "semantic_hash": ""
+  },
+  "analysis/city_monsoon_trend.png": {
+    "mtime": 1784810071.0723355,
+    "seen": 1789193309.182631,
+    "ast_hash": "9e524d329654a6b37a4484024439fd9d",
+    "semantic_hash": ""
+  },
+  "analysis/india_rainfall_100y.png": {
+    "mtime": 1784786843.5214078,
+    "seen": 1789193309.182632,
+    "ast_hash": "9bb6ae20b7bbc5c7517c60c5414140cd",
+    "semantic_hash": ""
+  },
+  "analysis/monsoon_extremes_timeline.png": {
+    "mtime": 1784805635.510821,
+    "seen": 1789193309.182632,
+    "ast_hash": "21605840b501d3f0438dc583ae90ed85",
+    "semantic_hash": ""
+  },
+  "analysis/pune_map.png": {
+    "mtime": 1784779400.9002833,
+    "seen": 1789193309.182633,
+    "ast_hash": "fa7fa67ec251840845d29b999e248d44",
+    "semantic_hash": ""
+  },
+  "analysis/pune_station_vs_grid.png": {
+    "mtime": 1784810073.2096093,
+    "seen": 1789193309.1826339,
+    "ast_hash": "cbe24096fdf883783e50fb4a79c9e60b",
+    "semantic_hash": ""
+  },
+  "analysis/rain_vs_events.png": {
+    "mtime": 1784802317.0535994,
+    "seen": 1789193309.1826339,
+    "ast_hash": "17548901af8465add46905f59e58baf8",
+    "semantic_hash": ""
+  },
+  "analysis/waterlogging_seasonality.png": {
+    "mtime": 1784786843.423385,
+    "seen": 1789193309.182635,
+    "ast_hash": "4cf586e3eba9af57e0c5c50ba5279674",
+    "semantic_hash": ""
+  }
+}

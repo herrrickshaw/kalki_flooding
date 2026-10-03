@@ -1,0 +1,2605 @@
+{
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "nodes": [
+    {
+      "id": "analysis_bengaluru_flood_road",
+      "label": "bengaluru_flood_road.py",
+      "file_type": "code",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_bengaluru_flood_road_km",
+      "label": "km()",
+      "file_type": "code",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L33",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_bengaluru_flood_road_dist_km",
+      "label": "dist_km()",
+      "file_type": "code",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_bengaluru_flood_road_style",
+      "label": "style()",
+      "file_type": "code",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L43",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_bengaluru_flood_road_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L53",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_bengaluru_flood_road_main_norm",
+      "label": "norm()",
+      "file_type": "code",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L57",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_bengaluru_flood_road_rationale_2",
+      "label": "Bengaluru: waterlogging events × accident blackspots, + 100-year rainfall…",
+      "file_type": "rationale",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_city_rain_metrics",
+      "label": "city_rain_metrics.py",
+      "file_type": "code",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_city_rain_metrics_style",
+      "label": "style()",
+      "file_type": "code",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L37",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_city_rain_metrics_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L47",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_city_rain_metrics_main_series",
+      "label": "series()",
+      "file_type": "code",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L91",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_city_rain_metrics_main_roll10",
+      "label": "roll10()",
+      "file_type": "code",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L95",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_city_rain_metrics_rationale_2",
+      "label": "Derived rainfall metrics per city-year from the IMD 0.25° cell series. Input:…",
+      "file_type": "rationale",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_deployment_patterns",
+      "label": "deployment_patterns.py",
+      "file_type": "code",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_deployment_patterns_classify_chennai",
+      "label": "classify_chennai()",
+      "file_type": "code",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L30",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_deployment_patterns_classify_pune",
+      "label": "classify_pune()",
+      "file_type": "code",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L39",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_deployment_patterns_load",
+      "label": "load()",
+      "file_type": "code",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L53",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_deployment_patterns_style_ax",
+      "label": "style_ax()",
+      "file_type": "code",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L63",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_deployment_patterns_scatter_by_cat",
+      "label": "scatter_by_cat()",
+      "file_type": "code",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L73",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_deployment_patterns_km_scale",
+      "label": "km_scale()",
+      "file_type": "code",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L81",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_deployment_patterns_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L88",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_deployment_patterns_rationale_2",
+      "label": "Flood-sensor deployment-pattern analysis. No observation history exists yet…",
+      "file_type": "rationale",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_pune_station_series",
+      "label": "pune_station_series.py",
+      "file_type": "code",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_pune_station_series_fetch_ghcn",
+      "label": "fetch_ghcn()",
+      "file_type": "code",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L38",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_pune_station_series_fetch_gsod",
+      "label": "fetch_gsod()",
+      "file_type": "code",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L50",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_pune_station_series_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L74",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_pune_station_series_rationale_2",
+      "label": "Pune STATION daily rainfall 1901-2025 — replaces the unusable grid cell.…",
+      "file_type": "rationale",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_rain_event_correlation",
+      "label": "rain_event_correlation.py",
+      "file_type": "code",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_rain_event_correlation_pearson",
+      "label": "pearson()",
+      "file_type": "code",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L42",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_rain_event_correlation_rationale_2",
+      "label": "Bengaluru: daily IMD cell rainfall × traffic-police waterlogging reports.…",
+      "file_type": "rationale",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "annual_refresh",
+      "label": "annual_refresh.py",
+      "file_type": "code",
+      "source_file": "annual_refresh.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "annual_refresh_refresh_years",
+      "label": "refresh_years()",
+      "file_type": "code",
+      "source_file": "annual_refresh.py",
+      "source_location": "L58",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "annual_refresh_build_table",
+      "label": "build_table()",
+      "file_type": "code",
+      "source_file": "annual_refresh.py",
+      "source_location": "L85",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "annual_refresh_send_mail",
+      "label": "send_mail()",
+      "file_type": "code",
+      "source_file": "annual_refresh.py",
+      "source_location": "L108",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "annual_refresh_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "annual_refresh.py",
+      "source_location": "L149",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "annual_refresh_rationale_2",
+      "label": "Annual IMD rainfall refresh: runs from daily_pipeline in Jan/Feb, once. What it…",
+      "file_type": "rationale",
+      "source_file": "annual_refresh.py",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "collector",
+      "label": "collector.py",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_load_env",
+      "label": "load_env()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L58",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_http_json",
+      "label": "http_json()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L70",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_fetch_flood_resources",
+      "label": "fetch_flood_resources()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L82",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_load_token_cache",
+      "label": "load_token_cache()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L97",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_save_token_cache",
+      "label": "save_token_cache()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L103",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_get_token",
+      "label": "get_token()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L108",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_init_db",
+      "label": "init_db()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L142",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_upsert_resources",
+      "label": "upsert_resources()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L164",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_store_observations",
+      "label": "store_observations()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L189",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_pull_latest",
+      "label": "pull_latest()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L206",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_backfill_days",
+      "label": "backfill_days()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L211",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_pull_temporal",
+      "label": "pull_temporal()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L231",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_coverage_report",
+      "label": "coverage_report()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L244",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "collector.py",
+      "source_location": "L262",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_rationale_2",
+      "label": "IUDX flood-sensor collector. Harvests all iudx:EnvFlood resources from the IUDX…",
+      "file_type": "rationale",
+      "source_file": "collector.py",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_rationale_83",
+      "label": "All iudx:EnvFlood resources from the catalogue (paginated).",
+      "file_type": "rationale",
+      "source_file": "collector.py",
+      "source_location": "L83",
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_rationale_109",
+      "label": "Token per item, cached until 5 min before expiry. Returns (token, err) — err is…",
+      "file_type": "rationale",
+      "source_file": "collector.py",
+      "source_location": "L109",
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_rationale_190",
+      "label": "Insert records, dedupe on (resource_id, obs_time). Returns rows added.",
+      "file_type": "rationale",
+      "source_file": "collector.py",
+      "source_location": "L190",
+      "_origin": "ast"
+    },
+    {
+      "id": "collector_rationale_212",
+      "label": "Dynamic first-grant backfill depth: cover the whole approval wait. Anchored to…",
+      "file_type": "rationale",
+      "source_file": "collector.py",
+      "source_location": "L212",
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access",
+      "label": "request_access.py",
+      "file_type": "code",
+      "source_file": "request_access.py",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access_load_env",
+      "label": "load_env()",
+      "file_type": "code",
+      "source_file": "request_access.py",
+      "source_location": "L36",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access_http_json",
+      "label": "http_json()",
+      "file_type": "code",
+      "source_file": "request_access.py",
+      "source_location": "L45",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access_flood_groups",
+      "label": "flood_groups()",
+      "file_type": "code",
+      "source_file": "request_access.py",
+      "source_location": "L52",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access_representative_leaves",
+      "label": "representative_leaves()",
+      "file_type": "code",
+      "source_file": "request_access.py",
+      "source_location": "L79",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access_identity_token",
+      "label": "identity_token()",
+      "file_type": "code",
+      "source_file": "request_access.py",
+      "source_location": "L90",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access_existing_requests",
+      "label": "existing_requests()",
+      "file_type": "code",
+      "source_file": "request_access.py",
+      "source_location": "L100",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "request_access.py",
+      "source_location": "L110",
+      "_callable": true,
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access_rationale_2",
+      "label": "Submit IUDX access requests for the EnvFlood resource groups. OUTWARD ACTION:…",
+      "file_type": "rationale",
+      "source_file": "request_access.py",
+      "source_location": "L2",
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access_rationale_53",
+      "label": "The EnvFlood resource groups: items whose own id is a resourceGroup for leaf…",
+      "file_type": "rationale",
+      "source_file": "request_access.py",
+      "source_location": "L53",
+      "_origin": "ast"
+    },
+    {
+      "id": "request_access_rationale_80",
+      "label": "One leaf resource id per group: {group_id: (leaf_id, label)}.",
+      "file_type": "rationale",
+      "source_file": "request_access.py",
+      "source_location": "L80",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme",
+      "label": "README.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_iudx_flood_collector",
+      "label": "iudx-flood-collector",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_sensor_fleet_catalogue_2026_07_23",
+      "label": "Sensor fleet (catalogue, 2026-07-23)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L10",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_layout",
+      "label": "Layout",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_run",
+      "label": "Run",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L32",
+      "_origin": "ast"
+    },
+    {
+      "id": "readme_access_flow_one_time",
+      "label": "Access flow (one-time)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "README.md",
+      "source_location": "L50",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_data_caveats",
+      "label": "DATA_CAVEATS.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_data_caveats_data_caveats_imd_0_25_city_cell_series_1901_2025",
+      "label": "Data caveats — IMD 0.25° city-cell series (1901–2025)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L1",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_data_caveats_pune_cell_unusable_for_trends",
+      "label": "🔴 Pune: cell unusable for trends",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L5",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_data_caveats_chennai_nearest_land_cell_not_city_center",
+      "label": "Chennai: nearest-land cell, not city-center",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L15",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_data_caveats_mumbai_inland_cell",
+      "label": "Mumbai: inland cell",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L21",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_data_caveats_delhi_gridded_extremes_muted",
+      "label": "Delhi: gridded extremes muted",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L27",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_data_caveats_general",
+      "label": "General",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L33",
+      "_origin": "ast"
+    },
+    {
+      "id": "analysis_data_caveats_pune_station_series_the_usable_pune_record",
+      "label": "Pune station series (the usable Pune record)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L41",
+      "_origin": "ast"
+    }
+  ],
+  "links": [
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "csv",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "math",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "urllib_request",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "collections",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "matplotlib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "analysis_bengaluru_flood_road_km",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "analysis_bengaluru_flood_road_dist_km",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "analysis_bengaluru_flood_road_style",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road",
+      "target": "analysis_bengaluru_flood_road_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road_main",
+      "target": "analysis_bengaluru_flood_road_main_norm",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road_dist_km",
+      "target": "analysis_bengaluru_flood_road_km",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road_main",
+      "target": "analysis_bengaluru_flood_road_main_norm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road_main",
+      "target": "analysis_bengaluru_flood_road_km",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road_main",
+      "target": "analysis_bengaluru_flood_road_dist_km",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road_main",
+      "target": "analysis_bengaluru_flood_road_style",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_bengaluru_flood_road_rationale_2",
+      "target": "analysis_bengaluru_flood_road",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/bengaluru_flood_road.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics",
+      "target": "csv",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics",
+      "target": "collections",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics",
+      "target": "matplotlib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics",
+      "target": "analysis_city_rain_metrics_style",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics",
+      "target": "analysis_city_rain_metrics_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics_main",
+      "target": "analysis_city_rain_metrics_main_series",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics_main",
+      "target": "analysis_city_rain_metrics_main_roll10",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L95",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics_main",
+      "target": "analysis_city_rain_metrics_main_series",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L112",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics_main",
+      "target": "analysis_city_rain_metrics_style",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L113",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics_main",
+      "target": "analysis_city_rain_metrics_main_roll10",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_city_rain_metrics_rationale_2",
+      "target": "analysis_city_rain_metrics",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/city_rain_metrics.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "math",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L11",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "duckdb",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "matplotlib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "analysis_deployment_patterns_classify_chennai",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "analysis_deployment_patterns_classify_pune",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "analysis_deployment_patterns_load",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "analysis_deployment_patterns_style_ax",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L63",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "analysis_deployment_patterns_scatter_by_cat",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L73",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "analysis_deployment_patterns_km_scale",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns",
+      "target": "analysis_deployment_patterns_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns_main",
+      "target": "analysis_deployment_patterns_load",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns_main",
+      "target": "analysis_deployment_patterns_classify_chennai",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns_main",
+      "target": "analysis_deployment_patterns_classify_pune",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns_main",
+      "target": "analysis_deployment_patterns_style_ax",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns_main",
+      "target": "analysis_deployment_patterns_scatter_by_cat",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns_main",
+      "target": "analysis_deployment_patterns_km_scale",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L122",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_deployment_patterns_rationale_2",
+      "target": "analysis_deployment_patterns",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/deployment_patterns.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series",
+      "target": "csv",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series",
+      "target": "gzip",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series",
+      "target": "io",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series",
+      "target": "urllib_request",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series",
+      "target": "analysis_pune_station_series_fetch_ghcn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series",
+      "target": "analysis_pune_station_series_fetch_gsod",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series",
+      "target": "analysis_pune_station_series_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series_main",
+      "target": "analysis_pune_station_series_fetch_ghcn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series_main",
+      "target": "analysis_pune_station_series_fetch_gsod",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_pune_station_series_rationale_2",
+      "target": "analysis_pune_station_series",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/pune_station_series.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_rain_event_correlation",
+      "target": "csv",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_rain_event_correlation",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_rain_event_correlation",
+      "target": "math",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_rain_event_correlation",
+      "target": "collections",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_rain_event_correlation",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_rain_event_correlation",
+      "target": "matplotlib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_rain_event_correlation",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_rain_event_correlation",
+      "target": "analysis_rain_event_correlation_pearson",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_rain_event_correlation_rationale_2",
+      "target": "analysis_rain_event_correlation",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/rain_event_correlation.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "csv",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "mimetypes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "smtplib",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "subprocess",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "email_message",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "annual_refresh_refresh_years",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "annual_refresh_build_table",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "annual_refresh_send_mail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh",
+      "target": "annual_refresh_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L149",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh_send_mail",
+      "target": "annual_refresh_build_table",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L118",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh_main",
+      "target": "annual_refresh_refresh_years",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh_main",
+      "target": "annual_refresh_send_mail",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L190",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh_rationale_2",
+      "target": "annual_refresh",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "annual_refresh.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L26",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "math",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "sys",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "urllib_error",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "urllib_parse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "urllib_request",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "duckdb",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_load_env",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_http_json",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L70",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_fetch_flood_resources",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L82",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_load_token_cache",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_save_token_cache",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_get_token",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_init_db",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L142",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_upsert_resources",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L164",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_store_observations",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L189",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_pull_latest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L206",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_backfill_days",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L211",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_pull_temporal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L231",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_coverage_report",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L244",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector",
+      "target": "collector_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L262",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_fetch_flood_resources",
+      "target": "collector_http_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_get_token",
+      "target": "collector_http_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_pull_latest",
+      "target": "collector_http_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L207",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_pull_temporal",
+      "target": "collector_http_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L239",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_init_db",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L269",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_coverage_report",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L271",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_load_env",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L274",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_fetch_flood_resources",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L277",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_upsert_resources",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L278",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_load_token_cache",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L282",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_get_token",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L286",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_pull_latest",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L299",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_backfill_days",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L308",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_pull_temporal",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L311",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_store_observations",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L312",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_main",
+      "target": "collector_save_token_cache",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L325",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_rationale_2",
+      "target": "collector",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_rationale_83",
+      "target": "collector_fetch_flood_resources",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L83",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_rationale_109",
+      "target": "collector_get_token",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L109",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_rationale_190",
+      "target": "collector_store_observations",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L190",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "collector_rationale_212",
+      "target": "collector_backfill_days",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "collector.py",
+      "source_location": "L212",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "urllib_error",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "urllib_request",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "request_access_load_env",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "request_access_http_json",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "request_access_flood_groups",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "request_access_representative_leaves",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L79",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "request_access_identity_token",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L90",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "request_access_existing_requests",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access",
+      "target": "request_access_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L110",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_flood_groups",
+      "target": "request_access_http_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_representative_leaves",
+      "target": "request_access_http_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L81",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_identity_token",
+      "target": "request_access_http_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_existing_requests",
+      "target": "request_access_http_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_main",
+      "target": "request_access_flood_groups",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L116",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_main",
+      "target": "request_access_load_env",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L121",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_main",
+      "target": "request_access_identity_token",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L122",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_main",
+      "target": "request_access_existing_requests",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L123",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_main",
+      "target": "request_access_representative_leaves",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L137",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_main",
+      "target": "request_access_http_json",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L145",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_rationale_2",
+      "target": "request_access",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L2",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_rationale_53",
+      "target": "request_access_flood_groups",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "request_access_rationale_80",
+      "target": "request_access_representative_leaves",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "request_access.py",
+      "source_location": "L80",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme",
+      "target": "readme_iudx_flood_collector",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_iudx_flood_collector",
+      "target": "readme_sensor_fleet_catalogue_2026_07_23",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_iudx_flood_collector",
+      "target": "readme_layout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_iudx_flood_collector",
+      "target": "readme_run",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "readme_iudx_flood_collector",
+      "target": "readme_access_flow_one_time",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_data_caveats",
+      "target": "analysis_data_caveats_data_caveats_imd_0_25_city_cell_series_1901_2025",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_data_caveats_data_caveats_imd_0_25_city_cell_series_1901_2025",
+      "target": "analysis_data_caveats_pune_cell_unusable_for_trends",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_data_caveats_data_caveats_imd_0_25_city_cell_series_1901_2025",
+      "target": "analysis_data_caveats_chennai_nearest_land_cell_not_city_center",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_data_caveats_data_caveats_imd_0_25_city_cell_series_1901_2025",
+      "target": "analysis_data_caveats_mumbai_inland_cell",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_data_caveats_data_caveats_imd_0_25_city_cell_series_1901_2025",
+      "target": "analysis_data_caveats_delhi_gridded_extremes_muted",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L27",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_data_caveats_data_caveats_imd_0_25_city_cell_series_1901_2025",
+      "target": "analysis_data_caveats_general",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "analysis_data_caveats_data_caveats_imd_0_25_city_cell_series_1901_2025",
+      "target": "analysis_data_caveats_pune_station_series_the_usable_pune_record",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "analysis/DATA_CAVEATS.md",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_origin": "ast"
+    },
+    {
+      "source": "annual_refresh_main",
+      "target": "analysis_pune_station_series_fetch_gsod",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "annual_refresh.py",
+      "source_location": "L177",
+      "weight": 1.0,
+      "_origin": "ast"
+    }
+  ],
+  "directed": false
+}

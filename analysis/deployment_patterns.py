@@ -45,7 +45,7 @@ def classify_pune(name, addr):
     # river names, or a bridge/bandhara/riverside site whose address omits the
     # river word (Holkar Bridge, Sambhaji Bridge, Kharadi Samshanbhumi are all
     # on the Mula/Mutha) — "bridge" minus nala/canal implies a river crossing
-    if re.search(r"\briver\b|mula|mutha|pawana|bridge|bandhara|samsham", a):
+    if re.search(r"\briver\b|mula|mutha|pawana|bridge|bandhara|samsha[mn]", a):
         return "River (bridge gauge)"
     return "Locality hotspot"
 

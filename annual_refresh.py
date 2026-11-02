@@ -17,6 +17,8 @@ Flags: --force (ignore month/marker), --no-mail (skip step 4, for testing).
 Run with the market-pipeline venv python (needs numpy/pandas/matplotlib);
 imdlib+xarray are vendored in ./pkgs (machine-local, gitignored).
 """
+from __future__ import annotations
+
 import argparse
 import csv
 import mimetypes
@@ -26,6 +28,7 @@ import sys
 from datetime import date
 from email.message import EmailMessage
 from pathlib import Path
+from typing import Iterable, List, Optional, Tuple
 
 BASE = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE / "pkgs"))
@@ -55,7 +58,20 @@ CELLS = {
 EXCLUDE_TREND = {"pune"}  # grid artifact — see analysis/DATA_CAVEATS.md
 
 
-def refresh_years(years):
+def replace_year_rows(path: Path, year_prefixes: Iterable[str], new_rows: List[list]) -> None:
+    """Rewrite CSV ``path``: drop data rows whose date starts with a prefix, append ``new_rows``."""
+    prefixes = tuple(year_prefixes)
+    with open(path, newline="") as f:
+        kept = [r for r in csv.reader(f)
+                if r and (r[0] == "date" or not r[0].startswith(prefixes))]
+    with open(path, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerows(kept)
+        w.writerows(new_rows)
+
+
+def refresh_years(years: Iterable[int]) -> None:
+    """Re-download IMD grids for ``years``, rewrite the city CSV rows, upload the .grd files."""
     import imdlib
     for y in years:
         imdlib.get_data("rain", y, y, fn_format="yearwise", file_dir=str(BASE))
@@ -69,33 +85,35 @@ def refresh_years(years):
                     new_rows[fn].append([str(t)[:10], city, round(float(val), 2)])
         ds.close()
         for fn, rows in new_rows.items():
-            p = DATA / fn
-            kept = [r for r in csv.reader(open(p))
-                    if r and (r[0] == "date" or not r[0].startswith(str(y)))]
-            with open(p, "w", newline="") as f:
-                w = csv.writer(f)
-                w.writerows(kept)
-                w.writerows(rows)
+            replace_year_rows(DATA / fn, [str(y)], rows)
         grd = BASE / "rain" / f"{y}.grd"
         subprocess.run(["rclone", "moveto", str(grd), f"{REMOTE}/{y}.grd",
                         "--retries", "3"], check=True)
         print(f"refreshed {y}")
 
 
-def build_table():
-    rows = [r for r in csv.DictReader(open(ANALYSIS / "city_rain_metrics.csv"))
-            if int(r["days_reported"]) >= 300]
-    thisyear = date.today().year
+MIN_DAYS_REPORTED = 300  # drop city-years with sparse coverage
+EARLY_YEARS = (1901, 1930)  # baseline window
+RECENT_WINDOW_YEARS = 30  # "last 30 years" window
+
+
+def build_table(metrics_csv: Optional[Path] = None,
+                thisyear: Optional[int] = None) -> List[Tuple[str, str, str, str, str]]:
+    """Per-city rows (city, early mean, recent mean, change, wettest day) of heavy-rain days/yr."""
+    with open(metrics_csv or ANALYSIS / "city_rain_metrics.csv", newline="") as f:
+        rows = [r for r in csv.DictReader(f) if int(r["days_reported"]) >= MIN_DAYS_REPORTED]
+    thisyear = thisyear or date.today().year
     out = []
     for city in sorted({r["city"] for r in rows}):
         cr = [r for r in rows if r["city"] == city]
         if city in EXCLUDE_TREND:
             out.append((city.title(), "—", "—", "excluded", "grid artifact"))
             continue
-        e = [r for r in cr if 1901 <= int(r["year"]) <= 1930]
-        l = [r for r in cr if thisyear - 30 <= int(r["year"]) <= thisyear - 1]
-        me = sum(float(r["heavy_days"]) for r in e) / len(e)
-        ml = sum(float(r["heavy_days"]) for r in l) / len(l)
+        early = [r for r in cr if EARLY_YEARS[0] <= int(r["year"]) <= EARLY_YEARS[1]]
+        late = [r for r in cr
+                if thisyear - RECENT_WINDOW_YEARS <= int(r["year"]) <= thisyear - 1]
+        me = sum(float(r["heavy_days"]) for r in early) / len(early)
+        ml = sum(float(r["heavy_days"]) for r in late) / len(late)
         mx = max(cr, key=lambda r: float(r["max_1day_mm"]))
         chg = f"{100 * (ml - me) / me:+.0f}%" if me else "n/a"
         out.append((city.title(), f"{me:.2f}", f"{ml:.2f}", chg,
@@ -105,12 +123,14 @@ def build_table():
     return out
 
 
-def send_mail(year):
+def send_mail(year: int) -> None:
+    """Mail the recomputed 12-city table plus charts (Gmail SMTP; creds from CREDS)."""
     env = {}
-    for line in open(CREDS):
-        if "=" in line and not line.startswith("#"):
-            k, v = line.strip().split("=", 1)
-            env[k] = v.strip().strip('"')
+    with open(CREDS) as f:
+        for line in f:
+            if "=" in line and not line.startswith("#"):
+                k, v = line.strip().split("=", 1)
+                env[k] = v.strip().strip('"')
     tr = "\n".join(
         f"<tr><td style='padding:4px 10px'>{c}</td><td align=right>{a}</td>"
         f"<td align=right>{b}</td><td align=right><b>{d}</b></td>"
@@ -146,7 +166,8 @@ Grids: dropbox:imd-rainfall-grid.</p></div>"""
     print(f"mailed {MAIL_TO}")
 
 
-def main():
+def main() -> None:
+    """CLI entry point (scheduled in Jan/Feb by the daily pipeline)."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--no-mail", action="store_true")
@@ -169,16 +190,10 @@ def main():
     sys.path.insert(0, str(ANALYSIS))
     from pune_station_series import fetch_gsod
     p = DATA / "city_daily_pune_station.csv"
-    kept = [r for r in csv.reader(open(p))
-            if r and (r[0] == "date"
-                      or not r[0].startswith((str(year - 1), str(year))))]
     fresh = []
     for y in (year - 1, year):
         fresh += [[d, "pune_station", v] for d, v in sorted(fetch_gsod(y).items())]
-    with open(p, "w", newline="") as f:
-        w = csv.writer(f)
-        w.writerows(kept)
-        w.writerows(fresh)
+    replace_year_rows(p, [str(year - 1), str(year)], fresh)
     print(f"pune_station: refreshed {year - 1}-{year} ({len(fresh)} rows)")
 
     subprocess.run([VENV_PY, str(ANALYSIS / "city_rain_metrics.py")],

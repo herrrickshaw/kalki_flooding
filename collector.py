@@ -23,26 +23,27 @@ Credentials: .env beside this file (IUDX_CLIENT_ID / IUDX_CLIENT_SECRET),
 gitignored, chmod 600. Do not point this at ~/Downloads — macOS TCC denies
 launchd access there.
 """
+from __future__ import annotations
+
 import argparse
 import json
 import math
-import os
 import sys
 import time
 import urllib.error
-import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
 
 import duckdb
+
+from iudx_common import AAA, CATALOGUE, CATALOGUE_PAGE_SIZE, HTTP_TIMEOUT_S, read_credentials
 
 BASE = Path(__file__).resolve().parent
 DB_PATH = BASE / "flood.duckdb"
 TOKEN_CACHE = BASE / ".tokens.json"
 
-CATALOGUE = "https://cos.iudx.org.in/iudx/cat/v1"
-AAA = "https://authorization.iudx.org.in/auth/v1"
 RS = "https://rs.cos.iudx.org.in/ngsi-ld/v1"
 
 UA = "iudx-flood-collector/0.1"
@@ -52,22 +53,23 @@ UA = "iudx-flood-collector/0.1"
 # never less than a week and never more than the RS is likely to serve.
 MIN_BACKFILL_DAYS = 7
 MAX_BACKFILL_DAYS = 30
+TOKEN_REFRESH_MARGIN_S = 300  # re-request a token 5 min before it expires
+REQUEST_PAUSE_S = 0.3  # politeness delay between sensors
+ERROR_BODY_CHARS = 200  # how much of an HTTP error body goes into access_log
 
 
 # ---------------------------------------------------------------- helpers
-def load_env():
-    env = {}
-    env_file = BASE / ".env"
-    if not env_file.exists():
+def load_env() -> Tuple[str, str]:
+    """Return (client_id, client_secret) from ``.env`` beside this file, or exit."""
+    try:
+        return read_credentials(BASE / ".env")
+    except FileNotFoundError:
         sys.exit("missing .env with IUDX_CLIENT_ID / IUDX_CLIENT_SECRET")
-    for line in env_file.read_text().splitlines():
-        if "=" in line and not line.startswith("#"):
-            k, v = line.split("=", 1)
-            env[k.strip()] = v.strip()
-    return env["IUDX_CLIENT_ID"], env["IUDX_CLIENT_SECRET"]
 
 
-def http_json(url, headers=None, data=None, method=None, timeout=30):
+def http_json(url: str, headers: Optional[Dict[str, str]] = None, data: Optional[bytes] = None,
+              method: Optional[str] = None, timeout: int = HTTP_TIMEOUT_S) -> Tuple[int, Any]:
+    """Send a request; return (status, decoded JSON body). Raises HTTPError on 4xx/5xx."""
     req = urllib.request.Request(
         url,
         data=data,
@@ -79,40 +81,46 @@ def http_json(url, headers=None, data=None, method=None, timeout=30):
 
 
 # ---------------------------------------------------------------- catalog
-def fetch_flood_resources():
+def fetch_flood_resources() -> List[dict]:
     """All iudx:EnvFlood resources from the catalogue (paginated)."""
     out, offset = [], 0
     while True:
-        q = f"{CATALOGUE}/search?property=[type]&value=[[iudx:EnvFlood]]&limit=500&offset={offset}"
+        q = (f"{CATALOGUE}/search?property=[type]&value=[[iudx:EnvFlood]]"
+             f"&limit={CATALOGUE_PAGE_SIZE}&offset={offset}")
         _, d = http_json(q)
         rows = d.get("results", [])
         out.extend(rows)
-        if len(rows) < 500 or len(out) >= d.get("totalHits", 0):
+        if len(rows) < CATALOGUE_PAGE_SIZE or len(out) >= d.get("totalHits", 0):
             break
-        offset += 500
+        offset += CATALOGUE_PAGE_SIZE
     return out
 
 
 # ---------------------------------------------------------------- tokens
-def load_token_cache():
-    if TOKEN_CACHE.exists():
-        return json.loads(TOKEN_CACHE.read_text())
+def load_token_cache(path: Path = None) -> dict:
+    """Read the per-resource token cache ({} if absent)."""
+    path = path or TOKEN_CACHE
+    if path.exists():
+        return json.loads(path.read_text())
     return {}
 
 
-def save_token_cache(cache):
-    TOKEN_CACHE.write_text(json.dumps(cache))
-    TOKEN_CACHE.chmod(0o600)
+def save_token_cache(cache: dict, path: Path = None) -> None:
+    """Persist the token cache with owner-only permissions."""
+    path = path or TOKEN_CACHE
+    path.write_text(json.dumps(cache))
+    path.chmod(0o600)
 
 
-def get_token(cid, csec, item_id, item_type="resource", cache=None):
+def get_token(cid: str, csec: str, item_id: str, item_type: str = "resource",
+              cache: Optional[dict] = None) -> Tuple[Optional[str], Optional[str]]:
     """Token per item, cached until 5 min before expiry.
 
     Returns (token, err) — err is the AAA error detail on failure.
     """
     cache = cache if cache is not None else {}
     hit = cache.get(item_id)
-    if hit and hit["expiry"] - time.time() > 300:
+    if hit and hit["expiry"] - time.time() > TOKEN_REFRESH_MARGIN_S:
         return hit["token"], None
     body = json.dumps(
         {"itemId": item_id, "itemType": item_type, "role": "consumer"}
@@ -133,13 +141,14 @@ def get_token(cid, csec, item_id, item_type="resource", cache=None):
     except urllib.error.HTTPError as e:
         try:
             detail = json.loads(e.read()).get("detail", "")
-        except Exception:
+        except (ValueError, AttributeError, OSError):  # body not JSON-object / unreadable
             detail = str(e.code)
         return None, f"{e.code}: {detail}"
 
 
 # ---------------------------------------------------------------- storage
-def init_db(con):
+def init_db(con: duckdb.DuckDBPyConnection) -> None:
+    """Create the resources / observations / access_log tables if missing."""
     con.execute(
         """
         CREATE TABLE IF NOT EXISTS resources (
@@ -161,14 +170,20 @@ def init_db(con):
     )
 
 
-def upsert_resources(con, resources, now):
+def resource_point(resource: dict) -> Tuple[Optional[float], Optional[float]]:
+    """(lon, lat) of a catalogue item with a GeoJSON Point location, else (None, None)."""
+    geom = (resource.get("location") or {}).get("geometry") or {}
+    coords = geom.get("coordinates")
+    if geom.get("type") == "Point" and isinstance(coords, list) and len(coords) >= 2 \
+            and all(isinstance(c, (int, float)) for c in coords[:2]):
+        return coords[0], coords[1]
+    return None, None
+
+
+def upsert_resources(con: duckdb.DuckDBPyConnection, resources: List[dict], now: datetime) -> None:
+    """Insert new catalogue items; refresh label/policy/status/last_seen of known ones."""
     for r in resources:
-        geom = (r.get("location") or {}).get("geometry") or {}
-        coords = geom.get("coordinates")
-        lon = lat = None
-        if geom.get("type") == "Point" and isinstance(coords, list) and len(coords) >= 2 \
-                and all(isinstance(c, (int, float)) for c in coords[:2]):
-            lon, lat = coords[0], coords[1]
+        lon, lat = resource_point(r)
         con.execute(
             """
             INSERT INTO resources VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
@@ -186,7 +201,8 @@ def upsert_resources(con, resources, now):
         )
 
 
-def store_observations(con, resource_id, records, now):
+def store_observations(con: duckdb.DuckDBPyConnection, resource_id: str,
+                       records: List[dict], now: datetime) -> int:
     """Insert records, dedupe on (resource_id, obs_time). Returns rows added."""
     added = 0
     for rec in records:
@@ -203,12 +219,13 @@ def store_observations(con, resource_id, records, now):
 
 
 # ---------------------------------------------------------------- pulls
-def pull_latest(token, resource_id):
+def pull_latest(token: str, resource_id: str) -> List[dict]:
+    """Latest observation(s) for one resource."""
     s, d = http_json(f"{RS}/entities/{resource_id}", headers={"token": token})
     return d.get("results", [])
 
 
-def backfill_days(con, resource_id, now):
+def backfill_days(con: duckdb.DuckDBPyConnection, resource_id: str, now: datetime) -> int:
     """Dynamic first-grant backfill depth: cover the whole approval wait.
 
     Anchored to the sensor's earliest access_log entry (the first time this
@@ -228,7 +245,8 @@ def backfill_days(con, resource_id, now):
     return max(MIN_BACKFILL_DAYS, min(waited, MAX_BACKFILL_DAYS))
 
 
-def pull_temporal(token, resource_id, days):
+def pull_temporal(token: str, resource_id: str, days: int) -> List[dict]:
+    """Observations of the last ``days`` days via the temporal API."""
     end = datetime.now(timezone.utc)
     start = end - timedelta(days=days)
     q = (
@@ -241,7 +259,8 @@ def pull_temporal(token, resource_id, days):
 
 
 # ---------------------------------------------------------------- main
-def coverage_report(con):
+def coverage_report(con: duckdb.DuckDBPyConnection) -> None:
+    """Print token-outcome counts (latest run per resource) and archive size."""
     print("== access coverage (latest run per resource) ==")
     rows = con.execute(
         """
@@ -259,7 +278,68 @@ def coverage_report(con):
     print(f"  observations archived: {n_obs[0]} rows from {n_obs[1]} sensors")
 
 
-def main():
+def log_access(con: duckdb.DuckDBPyConnection, now: datetime, rid: str, stage: str,
+               status: str, detail: str) -> None:
+    """Append one row to access_log (makes coverage auditable)."""
+    con.execute("INSERT INTO access_log VALUES (?,?,?,?,?)", [now, rid, stage, status, detail])
+
+
+def collect_resource(con: duckdb.DuckDBPyConnection, token: str, rid: str, now: datetime,
+                     temporal_days: Optional[int]) -> int:
+    """Pull latest (+ backfill when requested or on first grant) and archive; return rows added.
+
+    An explicit ``temporal_days`` wins; otherwise a first grant (no archived rows
+    yet) triggers the automatic backfill of the approval-wait window.
+    """
+    recs = pull_latest(token, rid)
+    days = temporal_days
+    if not days:
+        n_prior = con.execute(
+            "SELECT count(*) FROM observations WHERE resource_id=?", [rid]
+        ).fetchone()[0]
+        if n_prior == 0:
+            days = backfill_days(con, rid, now)
+            print(f"  first grant for {rid[:8]}… — backfilling {days}d")
+    if days:
+        recs += pull_temporal(token, rid, days)
+    return store_observations(con, rid, recs, now)
+
+
+def run_collection(con: duckdb.DuckDBPyConnection, cid: str, csec: str, now: datetime,
+                   temporal_days: Optional[int], token_cache_path: Path = None) -> None:
+    """Catalogue refresh -> per-resource tokens -> pulls -> archive; prints a summary."""
+    resources = fetch_flood_resources()
+    upsert_resources(con, resources, now)
+    active = [r for r in resources if r.get("itemStatus") == "ACTIVE"]
+    print(f"catalogue: {len(resources)} EnvFlood resources ({len(active)} active)")
+
+    cache = load_token_cache(token_cache_path)
+    granted = denied = rows_added = 0
+    for r in active:
+        rid = r["id"]
+        tok, err = get_token(cid, csec, rid, cache=cache)
+        if not tok:
+            denied += 1
+            log_access(con, now, rid, "token", "denied", err)
+            continue
+        granted += 1
+        log_access(con, now, rid, "token", "ok", "")
+        try:
+            added = collect_resource(con, tok, rid, now, temporal_days)
+            rows_added += added
+            log_access(con, now, rid, "fetch", "ok", f"{added} new")
+        except urllib.error.HTTPError as e:
+            log_access(con, now, rid, "fetch", f"http_{e.code}",
+                       e.read().decode()[:ERROR_BODY_CHARS])
+        time.sleep(REQUEST_PAUSE_S)  # be polite to the RS
+
+    save_token_cache(cache, token_cache_path)
+    print(f"tokens: {granted} granted, {denied} denied | new observation rows: {rows_added}")
+    coverage_report(con)
+
+
+def main() -> None:
+    """CLI entry point."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--temporal", type=int, metavar="DAYS", help="backfill N days via temporal API")
     ap.add_argument("--coverage", action="store_true", help="report only, no fetch")
@@ -272,59 +352,7 @@ def main():
         return
 
     cid, csec = load_env()
-    now = datetime.now(timezone.utc)
-
-    resources = fetch_flood_resources()
-    upsert_resources(con, resources, now)
-    active = [r for r in resources if r.get("itemStatus") == "ACTIVE"]
-    print(f"catalogue: {len(resources)} EnvFlood resources ({len(active)} active)")
-
-    cache = load_token_cache()
-    granted = denied = rows_added = 0
-    for r in active:
-        rid = r["id"]
-        tok, err = get_token(cid, csec, rid, cache=cache)
-        if not tok:
-            denied += 1
-            con.execute(
-                "INSERT INTO access_log VALUES (?,?,?,?,?)",
-                [now, rid, "token", "denied", err],
-            )
-            continue
-        granted += 1
-        con.execute(
-            "INSERT INTO access_log VALUES (?,?,?,?,?)", [now, rid, "token", "ok", ""]
-        )
-        try:
-            recs = pull_latest(tok, rid)
-            # explicit --temporal wins; otherwise first grant (no archived rows
-            # yet) triggers the automatic backfill of the approval-wait window
-            days = args.temporal
-            if not days:
-                n_prior = con.execute(
-                    "SELECT count(*) FROM observations WHERE resource_id=?", [rid]
-                ).fetchone()[0]
-                if n_prior == 0:
-                    days = backfill_days(con, rid, now)
-                    print(f"  first grant for {rid[:8]}… — backfilling {days}d")
-            if days:
-                recs += pull_temporal(tok, rid, days)
-            added = store_observations(con, rid, recs, now)
-            rows_added += added
-            con.execute(
-                "INSERT INTO access_log VALUES (?,?,?,?,?)",
-                [now, rid, "fetch", "ok", f"{added} new"],
-            )
-        except urllib.error.HTTPError as e:
-            con.execute(
-                "INSERT INTO access_log VALUES (?,?,?,?,?)",
-                [now, rid, "fetch", f"http_{e.code}", e.read().decode()[:200]],
-            )
-        time.sleep(0.3)  # be polite to the RS
-
-    save_token_cache(cache)
-    print(f"tokens: {granted} granted, {denied} denied | new observation rows: {rows_added}")
-    coverage_report(con)
+    run_collection(con, cid, csec, datetime.now(timezone.utc), args.temporal)
     con.close()
 
 

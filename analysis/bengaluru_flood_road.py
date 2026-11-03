@@ -14,7 +14,7 @@ import json
 import math
 import sys
 import urllib.request
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 import matplotlib
@@ -50,37 +50,46 @@ def style(ax, title):
     ax.set_axisbelow(True)
 
 
-def main():
-    events = json.load(open(RAW / "events_full.json"))
-    spots = json.load(open(RAW / "blackspots_full.json"))
+def norm(c):
+    """Return (lon, lat). The traffic-police feed emits [lat, lon] —
+    backwards GeoJSON — while blackspots are correct [lon, lat]. Around
+    Bengaluru lat≈13, lon≈77.5, so order is decidable from magnitude."""
+    a, b = c[:2]
+    return (b, a) if a < 60 < b else (a, b)
 
-    def norm(c):
-        """Return (lon, lat). The traffic-police feed emits [lat, lon] —
-        backwards GeoJSON — while blackspots are correct [lon, lat]. Around
-        Bengaluru lat≈13, lon≈77.5, so order is decidable from magnitude."""
-        a, b = c[:2]
-        return (b, a) if a < 60 < b else (a, b)
 
+def load_waterlogging(events):
+    """Water-logging events with usable coordinates, inside the Bengaluru bbox.
+
+    Returns (events, [(lon, lat)]). Drops GPS garbage (11 events sit at e.g.
+    lon 20.6 / lat −11.4 — outside any Bengaluru bbox — and would inflate the
+    density denominator ~100×)."""
     wl = [e for e in events
           if e.get("eventTitle") == "water_logging"
           and isinstance(e.get("location"), dict)
           and e["location"].get("coordinates")]
     wl_pts = [norm(e["location"]["coordinates"]) for e in wl]
-    # drop GPS garbage (11 events sit at e.g. lon 20.6 / lat −11.4 — outside
-    # any Bengaluru bbox — and would inflate the density denominator ~100×)
     n_raw = len(wl_pts)
     keep = [(p, e) for p, e in zip(wl_pts, wl) if 77.3 < p[0] < 77.9 and 12.7 < p[1] < 13.3]
     wl_pts = [p for p, _ in keep]
     wl = [e for _, e in keep]
     if n_raw - len(wl_pts):
         print(f"dropped {n_raw - len(wl_pts)} events with out-of-city coords")
-    bs = [(tuple(s["location"]["coordinates"][:2]), s.get("severityScore", 0))
-          for s in spots if isinstance(s.get("location"), dict)]
-    print(f"waterlogging events with coords: {len(wl_pts)} | blackspots: {len(bs)}")
+    return wl, wl_pts
 
-    # ---- proximity: waterlogging events within 1 km of each blackspot,
-    # vs the uniform-density expectation over the event bounding box
-    lons = [p[0] for p in wl_pts]; lats = [p[1] for p in wl_pts]
+
+def load_blackspots(spots):
+    """[((lon, lat), severityScore)] for blackspots that carry a location."""
+    return [(tuple(s["location"]["coordinates"][:2]), s.get("severityScore", 0))
+            for s in spots if isinstance(s.get("location"), dict)]
+
+
+def proximity_rows(wl_pts, bs):
+    """Waterlogging events within 1 km of each blackspot vs uniform-density expectation.
+
+    Returns (rows sorted by count desc, hits, expected_1km)."""
+    lons = [p[0] for p in wl_pts]
+    lats = [p[1] for p in wl_pts]
     area = (max(lons) - min(lons)) * km(sum(lats) / len(lats)) * (max(lats) - min(lats)) * 111.32
     dens = len(wl_pts) / area  # events per km²
     expected_1km = dens * math.pi  # per 1-km disc
@@ -91,13 +100,19 @@ def main():
                      "ratio_vs_uniform": round(n / expected_1km, 2) if expected_1km else None})
         hits += n > 0
     rows.sort(key=lambda r: -r["wl_within_1km"])
-    with open(BASE / "blackspot_waterlogging.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=rows[0].keys()); w.writeheader(); w.writerows(rows)
-    med_ratio = sorted(r["ratio_vs_uniform"] for r in rows)[len(rows) // 2]
-    print(f"blackspots with ≥1 waterlogging event within 1 km: {hits}/{len(bs)}")
-    print(f"uniform expectation per 1-km disc: {expected_1km:.1f} | median blackspot ratio: {med_ratio}")
+    return rows, hits, expected_1km
 
-    # ---- map
+
+def write_blackspot_csv(rows, path):
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=rows[0].keys())
+        w.writeheader()
+        w.writerows(rows)
+
+
+def plot_map(wl_pts, bs, rows, path):
+    lons = [p[0] for p in wl_pts]
+    lats = [p[1] for p in wl_pts]
     fig, ax = plt.subplots(figsize=(8.5, 8), dpi=150)
     fig.patch.set_facecolor(SURFACE)
     lat0 = sum(lats) / len(lats)
@@ -118,10 +133,12 @@ def main():
     ax.legend(loc="upper right", fontsize=8, frameon=False, labelcolor=INK)
     ax.set_xlabel("longitude", color=INK2, fontsize=8)
     ax.set_ylabel("latitude", color=INK2, fontsize=8)
-    fig.tight_layout(); fig.savefig(BASE / "bengaluru_flood_road_map.png", facecolor=SURFACE)
+    fig.tight_layout()
+    fig.savefig(path, facecolor=SURFACE)
     plt.close(fig)
 
-    # ---- seasonality
+
+def plot_seasonality(wl, path):
     months = Counter(e["observationDateTime"][:7] for e in wl if e.get("observationDateTime"))
     keys = sorted(months)
     fig, ax = plt.subplots(figsize=(9, 3.6), dpi=150)
@@ -135,20 +152,29 @@ def main():
     ax.annotate(f"peak {peak}: {months[peak]}", (keys.index(peak), months[peak]),
                 xytext=(0, 6), textcoords="offset points", ha="center",
                 fontsize=8, color=INK2)
-    fig.tight_layout(); fig.savefig(BASE / "waterlogging_seasonality.png", facecolor=SURFACE)
+    fig.tight_layout()
+    fig.savefig(path, facecolor=SURFACE)
     plt.close(fig)
 
-    # ---- 100-year rainfall (World Bank CCKP, CRU TS4.07, country-level)
-    cached = RAW / "cckp.json"
+
+def load_rainfall(raw):
+    """India annual precipitation (World Bank CCKP, CRU TS4.07, country-level).
+
+    Uses the cached cckp.json in `raw` if present, else fetches it."""
+    cached = raw / "cckp.json"
     if cached.exists():
-        series = json.load(open(cached))["data"]["IND"]
-    else:
-        url = ("https://cckpapi.worldbank.org/cckp/v1/cru-x0.5_timeseries_pr_timeseries_"
-               "annual_1901-2022_mean_historical_cru_ts4.07_mean/IND?_format=json")
-        # CCKP 403s python's default UA; a browser-ish UA passes (curl does too)
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=30) as r:
-            series = json.loads(r.read())["data"]["IND"]
+        with open(cached) as f:
+            return json.load(f)["data"]["IND"]
+    url = ("https://cckpapi.worldbank.org/cckp/v1/cru-x0.5_timeseries_pr_timeseries_"
+           "annual_1901-2022_mean_historical_cru_ts4.07_mean/IND?_format=json")
+    # CCKP 403s python's default UA; a browser-ish UA passes (curl does too)
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return json.loads(r.read())["data"]["IND"]
+
+
+def plot_rainfall(series, path):
+    """Plot the annual series with a 10-yr rolling mean; returns (years, values)."""
     yrs = sorted(int(k[:4]) for k in series)
     vals = {int(k[:4]): v for k, v in series.items()}
     ys = [vals[y] for y in yrs]
@@ -163,8 +189,31 @@ def main():
     ax.annotate("annual", (yrs[8], ys[8]), xytext=(4, -12), textcoords="offset points",
                 fontsize=8, color=INK2)
     ax.set_ylabel("mm/year", color=INK2, fontsize=8)
-    fig.tight_layout(); fig.savefig(BASE / "india_rainfall_100y.png", facecolor=SURFACE)
+    fig.tight_layout()
+    fig.savefig(path, facecolor=SURFACE)
     plt.close(fig)
+    return yrs, ys
+
+
+def main():
+    with open(RAW / "events_full.json") as f:
+        events = json.load(f)
+    with open(RAW / "blackspots_full.json") as f:
+        spots = json.load(f)
+
+    wl, wl_pts = load_waterlogging(events)
+    bs = load_blackspots(spots)
+    print(f"waterlogging events with coords: {len(wl_pts)} | blackspots: {len(bs)}")
+
+    rows, hits, expected_1km = proximity_rows(wl_pts, bs)
+    write_blackspot_csv(rows, BASE / "blackspot_waterlogging.csv")
+    med_ratio = sorted(r["ratio_vs_uniform"] for r in rows)[len(rows) // 2]
+    print(f"blackspots with ≥1 waterlogging event within 1 km: {hits}/{len(bs)}")
+    print(f"uniform expectation per 1-km disc: {expected_1km:.1f} | median blackspot ratio: {med_ratio}")
+
+    plot_map(wl_pts, bs, rows, BASE / "bengaluru_flood_road_map.png")
+    plot_seasonality(wl, BASE / "waterlogging_seasonality.png")
+    yrs, ys = plot_rainfall(load_rainfall(RAW), BASE / "india_rainfall_100y.png")
     print("rainfall series:", yrs[0], "->", yrs[-1], f"| mean {sum(ys)/len(ys):.0f} mm")
 
 

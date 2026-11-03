@@ -13,15 +13,18 @@ Auth chain (learned the hard way):
   itemType=resource_server, role=consumer; sent RAW (no "Bearer ") in the
   Authorization header — the APD's header pattern forbids spaces.
 """
+from __future__ import annotations
+
 import argparse
 import json
 import urllib.error
 import urllib.request
 from pathlib import Path
+from typing import Any, Dict, Optional, Tuple
+
+from iudx_common import AAA, CATALOGUE, CATALOGUE_PAGE_SIZE, HTTP_TIMEOUT_S, read_credentials
 
 BASE = Path(__file__).resolve().parent
-CATALOGUE = "https://cos.iudx.org.in/iudx/cat/v1"
-AAA = "https://authorization.iudx.org.in/auth/v1"
 APD = "https://acl-apd.iudx.org.in/dx/apd/acl/v1"
 
 ADDITIONAL_INFO = {
@@ -33,28 +36,31 @@ ADDITIONAL_INFO = {
 }
 
 
-def load_env():
-    env = {}
-    for line in (BASE / ".env").read_text().splitlines():
-        if "=" in line and not line.startswith("#"):
-            k, v = line.split("=", 1)
-            env[k.strip()] = v.strip()
-    return env["IUDX_CLIENT_ID"], env["IUDX_CLIENT_SECRET"]
+def load_env() -> Tuple[str, str]:
+    """Return (client_id, client_secret) from ``.env`` beside this file."""
+    return read_credentials(BASE / ".env")
 
 
-def http_json(url, headers=None, data=None, method=None):
+def http_json(url: str, headers: Optional[Dict[str, str]] = None, data: Optional[bytes] = None,
+              method: Optional[str] = None) -> Any:
+    """Send a request and return the decoded JSON body. Raises HTTPError on 4xx/5xx."""
     req = urllib.request.Request(url, data=data, method=method or ("POST" if data else "GET"),
                                  headers=headers or {})
-    with urllib.request.urlopen(req, timeout=30) as r:
+    with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT_S) as r:
         return json.loads(r.read())
 
 
-def flood_groups():
+def _search_url(offset: int) -> str:
+    return (f"{CATALOGUE}/search?property=[type]&value=[[iudx:EnvFlood]]"
+            f"&limit={CATALOGUE_PAGE_SIZE}&offset={offset}")
+
+
+def flood_groups() -> Dict[str, dict]:
     """The EnvFlood resource groups: items whose own id is a resourceGroup for
     leaf sensors (leaf items carry `resourceGroup`; group items don't)."""
     leaves, groups, offset = {}, {}, 0
     while True:
-        d = http_json(f"{CATALOGUE}/search?property=[type]&value=[[iudx:EnvFlood]]&limit=500&offset={offset}")
+        d = http_json(_search_url(offset))
         rows = d.get("results", [])
         for r in rows:
             g = r.get("resourceGroup")
@@ -63,9 +69,9 @@ def flood_groups():
             else:
                 groups[r["id"]] = {"label": r.get("label"), "instance": r.get("instance"),
                                    "provider": r.get("provider")}
-        if len(rows) < 500:
+        if len(rows) < CATALOGUE_PAGE_SIZE:
             break
-        offset += 500
+        offset += CATALOGUE_PAGE_SIZE
     for g, info in groups.items():
         info["n_leaves"] = len(leaves.get(g, []))
     # groups referenced by leaves but not returned by the search
@@ -76,9 +82,9 @@ def flood_groups():
     return groups
 
 
-def representative_leaves():
+def representative_leaves() -> Dict[str, Tuple[str, Optional[str]]]:
     """One leaf resource id per group: {group_id: (leaf_id, label)}."""
-    d = http_json(f"{CATALOGUE}/search?property=[type]&value=[[iudx:EnvFlood]]&limit=500&offset=0")
+    d = http_json(_search_url(0))
     rep = {}
     for r in d.get("results", []):
         g = r.get("resourceGroup")
@@ -87,7 +93,8 @@ def representative_leaves():
     return rep
 
 
-def identity_token(cid, csec):
+def identity_token(cid: str, csec: str) -> str:
+    """Identity token (resource_server scope) used to authenticate against the APD."""
     d = http_json(f"{AAA}/token",
                   data=json.dumps({"itemId": "rs.cos.iudx.org.in",
                                    "itemType": "resource_server",
@@ -97,7 +104,8 @@ def identity_token(cid, csec):
     return d["results"]["accessToken"]
 
 
-def existing_requests(tok):
+def existing_requests(tok: str) -> list:
+    """Access requests already filed by this account (404 means none)."""
     try:
         d = http_json(f"{APD}/policies/requests", headers={"Authorization": tok})
         return d.get("results", [])
@@ -107,7 +115,8 @@ def existing_requests(tok):
         raise
 
 
-def main():
+def main() -> None:
+    """CLI entry point: list groups and requests; with --submit, file new requests."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--submit", action="store_true")

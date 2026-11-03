@@ -1,0 +1,2 @@
+wrote <W>/city_rain_metrics.csv (6 city-years)
+wrote city_monsoon_trend.png, city_extreme_days.png

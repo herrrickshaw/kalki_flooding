@@ -1,0 +1,21 @@
+[project]
+name = "kalki-flooding"
+version = "0.1.0"
+description = "IUDX flood-sensor archive collector and India city rainfall analysis"
+requires-python = ">=3.9"
+dependencies = ["duckdb"]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py39"
+extend-exclude = ["pkgs", ".venv", "graphify-out"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

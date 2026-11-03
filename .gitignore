@@ -9,3 +9,4 @@ __pycache__/
 .apd_token
 *.token
 pkgs/
+.venv/

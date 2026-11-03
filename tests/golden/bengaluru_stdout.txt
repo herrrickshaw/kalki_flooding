@@ -1,0 +1,5 @@
+dropped 1 events with out-of-city coords
+waterlogging events with coords: 60 | blackspots: 8
+blackspots with ≥1 waterlogging event within 1 km: 1/8
+uniform expectation per 1-km disc: 0.4 | median blackspot ratio: 0.0
+rainfall series: 1901 -> 1930 | mean 1000 mm

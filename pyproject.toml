@@ -19,7 +19,3 @@ select = ["E", "F", "W", "I"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
-
-[tool.ruff.lint.per-file-ignores]
-# Phase 2: analysis scripts still use `a; b` one-liners
-"analysis/*.py" = ["E702"]

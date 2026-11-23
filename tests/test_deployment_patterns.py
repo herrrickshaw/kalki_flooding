@@ -75,7 +75,8 @@ def test_load_returns_only_active_located_sensors_sorted_by_name(dp, tmp_path):
 
 
 def test_main_writes_summary_charts_and_prints_stats(dp, tmp_path, capsys):
-    named = [("chennai", "FM_Box1_Kathivakkam_High_Road", "l", "a", 80.30, 13.20, "ACTIVE"),
+    named = [("chennai", "FM_Box1_On_The_Line", "l", "a", 80.31, 13.09, "ACTIVE"),
+             ("chennai", "FM_Box1_Kathivakkam_High_Road", "l", "a", 80.30, 13.20, "ACTIVE"),
              ("chennai", "FM_Box2_Vyasarpadi_Subway", "l", "a", 80.25, 13.12, "ACTIVE"),
              ("pune", "FWR058", "l", "Mula river", 73.77, 18.57, "ACTIVE"),
              ("pune", "FWR026", "l", "Ambil Odha", 73.85, 18.45, "ACTIVE")]
@@ -87,14 +88,14 @@ def test_main_writes_summary_charts_and_prints_stats(dp, tmp_path, capsys):
     rows = list(csv.reader(open(base / "pattern_summary.csv")))
     assert rows[0] == ["city", "sensor", "category", "watches", "lon", "lat"]
     cities = Counter(r[0] for r in rows[1:])
-    assert cities == {"chennai": 8, "pune": 8}
+    assert cities == {"chennai": 9, "pune": 8}
     ch = [r for r in rows if r[1] == "FM_Box2_Vyasarpadi_Subway"][0]
     assert ch[2] == "Road underpass" and ch[3] == "" and ch[4:] == ["80.25", "13.12"]
     pu = [r for r in rows if r[1] == "FWR058"][0]
     assert pu[2] == "River (bridge gauge)" and pu[3] == "Mula river"       # Pune rows carry the address
-    assert "north of 13.09: " in out and "of 8" in out
+    assert not any(float(r[5]) > 13.09 and r[1] == "FM_Box1_On_The_Line" for r in rows[1:])   # strictly north only
     north = sum(1 for r in rows[1:] if r[0] == "chennai" and float(r[5]) > 13.09)
-    assert f"north of 13.09: {north} of 8" in out
+    assert f"north of 13.09: {north} of 9" in out
     assert "Chennai: Counter(" in out and "Pune: Counter(" in out
     rivers = [float(r[4]) for r in rows[1:] if r[0] == "pune" and r[2] == "River (bridge gauge)"]
     span = (max(rivers) - min(rivers))

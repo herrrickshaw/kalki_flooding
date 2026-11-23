@@ -106,7 +106,7 @@ def test_main_splices_ghcn_before_1973_and_gsod_from_1973(pss, monkeypatch, tmp_
 
     def gsod_year(y):
         asked.append(y)
-        return {f"{y}-01-01": float(y - 1972)} if y in (1973, 2025) else {}
+        return ({f"{y}-01-02": float(y - 1972)} if y in (1973, 2025) else {})
 
     monkeypatch.setattr(pss, "fetch_gsod", gsod_year)
     # grid-cell data for the era comparison
@@ -120,10 +120,10 @@ def test_main_splices_ghcn_before_1973_and_gsod_from_1973(pss, monkeypatch, tmp_
     rows = list(csv.reader(open(pss.OUT)))
     assert rows[0] == ["date", "city", "rain_mm"]
     got = {r[0]: float(r[2]) for r in rows[1:]}
-    assert got == {"1901-01-01": 1.0, "1972-12-31": 5.0, "1973-01-01": 1.0, "2025-01-01": 53.0}   # GSOD supersedes GHCN from 1973
+    assert got == {"1901-01-01": 1.0, "1972-12-31": 5.0, "1973-01-02": 1.0, "2025-01-02": 53.0}   # GHCN stops before 1973-01-01; GSOD from then
     assert [r[0] for r in rows[1:]] == sorted(got)
     assert all(r[1] == "pune_station" for r in rows[1:])
-    assert "GHCN days: 3" in out and "merged days: 4" in out
+    assert "GHCN days: 3" in out and "merged days: 4" in out and "1973-01-01" not in "".join(got)
     assert "1975: station       0 mm (0d ⚠️) | grid cell      15 mm" in out     # grid cell: pune rows only
     assert "1935: station       0 mm (0d ⚠️) | grid cell       0 mm" in out
     assert "2024:" in out

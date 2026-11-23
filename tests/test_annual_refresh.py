@@ -189,9 +189,14 @@ def test_build_table_windows_are_inclusive_and_sparse_years_ignored(ar, monkeypa
     write_csv(ar.ANALYSIS / "city_rain_metrics.csv", rows, METRIC_HEADER)
     t = ar.build_table()[0]
     assert t[1:4] == ("2.00", "3.00", "+50%") and t[4] == "100.0 mm (1910)"
-    rows = metrics_rows("chennai", 2, 3) + [["chennai", 1920, 0, 0, 0, 0, 2, 0, 0, 10.0, 300]]
+    rows = metrics_rows("chennai", 2, 3)
+    rows += [["chennai", 1920, 0, 0, 0, 0, 32, 0, 0, 10.0, 300]]                 # exactly 300 days: kept
     write_csv(ar.ANALYSIS / "city_rain_metrics.csv", rows, METRIC_HEADER)
-    assert ar.build_table()[0][1] == "2.00"                             # exactly 300 days is kept
+    assert ar.build_table()[0][1] == f"{(2 * 30 + 32) / 31:.2f}"
+    # 1930 is the last early year: a different value there must move the mean
+    rows = [r for r in metrics_rows("chennai", 2, 3) if r[1] != 1930] + [["chennai", 1930, 0, 0, 0, 0, 32, 0, 0, 10.0, 365]]
+    write_csv(ar.ANALYSIS / "city_rain_metrics.csv", rows, METRIC_HEADER)
+    assert ar.build_table()[0][1] == f"{(2 * 29 + 32) / 30:.2f}"
 
 
 # ── send_mail ────────────────────────────────────────────────────────────────

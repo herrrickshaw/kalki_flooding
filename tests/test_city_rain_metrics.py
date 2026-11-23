@@ -102,12 +102,18 @@ def test_charts_are_written_for_few_and_many_cities(crm, tmp_path, monkeypatch, 
 
 
 def test_single_city_and_short_years(crm, tmp_path, monkeypatch):
+    import matplotlib.figure as mf
+    seen = []
+    real = mf.Figure.savefig
+    monkeypatch.setattr(mf.Figure, "savefig", lambda self, *a, **k: (seen.append(
+        [list(l.get_xdata()) for l in self.axes[0].lines]), real(self, *a, **k))[1])
     src = tmp_path / "data" / "city_daily.csv"
     write(src, full_years("solo", [2001]) + full_years("solo", [2002], ndays=299))     # 299 days: excluded from plots
     monkeypatch.setattr(crm, "SRCS", [src])
     crm.main()
     assert metrics(tmp_path)[("solo", 2002)]["days_reported"] == "299"       # still in the CSV
     assert (tmp_path / "city_monsoon_trend.png").exists()
+    assert seen[0][0] == [2001]                          # the 299-day year is left out of the plotted series
 
 
 def test_no_rows_writes_header_only_and_no_charts(crm, tmp_path, monkeypatch, capsys):

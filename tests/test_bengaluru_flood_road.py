@@ -161,3 +161,13 @@ def test_a_single_cluster_of_events_does_not_crash(bfr, capsys):
     put(raw, [ev(77.6, 12.97)] * 5, [spot(77.6, 12.97)])
     m.main()
     assert "within 1 km: 1/1" in capsys.readouterr().out
+
+
+def test_a_blackspot_exactly_one_kilometre_away_counts(bfr, monkeypatch):
+    m, raw = bfr
+    events = [ev(77.5, 12.9), ev(77.7, 13.1), ev(77.6, 13.0)]
+    put(raw, events, [spot(77.6, 13.0)])
+    monkeypatch.setattr(m, "dist_km", lambda a, b: 1.0)
+    m.main()
+    rows = list(csv.DictReader(open(m.BASE / "blackspot_waterlogging.csv")))
+    assert rows[0]["wl_within_1km"] == "3"

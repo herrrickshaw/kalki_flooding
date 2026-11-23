@@ -9,17 +9,21 @@ What it does (target year Y = last calendar year):
      in analysis/data/city_daily.csv (+ _more.csv).
   3. Re-runs city_rain_metrics.py, refreshes charts + CSV.
   4. Mails the recomputed 12-city summary (table built from data, not
-     hardcoded) with charts attached.
-  5. Copies updated CSVs to Dropbox, commits + pushes the repo.
+     hardcoded) with charts attached, only if NOTIFY_EMAIL is set.
+  5. Copies updated CSVs to Dropbox and commits locally; the repo is pushed
+     only when --push is given.
   6. Writes marker analysis/data/.refresh_done_<Y> — the pipeline guard.
 
-Flags: --force (ignore month/marker), --no-mail (skip step 4, for testing).
+Flags: --force (ignore month/marker), --no-mail (skip step 4, for testing),
+--push (git push origin main after the commit; off by default).
+Environment: NOTIFY_EMAIL (recipient; mail is skipped when unset).
 Run with the market-pipeline venv python (needs numpy/pandas/matplotlib);
 imdlib+xarray are vendored in ./pkgs (machine-local, gitignored).
 """
 import argparse
 import csv
 import mimetypes
+import os
 import smtplib
 import subprocess
 import sys
@@ -35,7 +39,8 @@ DATA = ANALYSIS / "data"
 REMOTE = "dropbox:imd-rainfall-grid"
 VENV_PY = "/Users/umashankar/market-pipeline/code/python_files/.venv/bin/python"
 CREDS = Path.home() / ".config/market-secrets/credentials.env"
-MAIL_TO = "umashankartd1991@gmail.com"
+# Notification recipient comes from the environment; no default. Unset => no mail.
+MAIL_TO = os.environ.get("NOTIFY_EMAIL")
 
 # city -> (lat, lon, csv-file) ; Chennai/Mumbai use nearest LAND cells
 CELLS = {
@@ -106,6 +111,9 @@ def build_table():
 
 
 def send_mail(year):
+    if not MAIL_TO:
+        print("NOTIFY_EMAIL not set — skipping notification mail")
+        return
     env = {}
     for line in open(CREDS):
         if "=" in line and not line.startswith("#"):
@@ -143,13 +151,15 @@ Grids: dropbox:imd-rainfall-grid.</p></div>"""
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
         s.login(env["GMAIL_USER"], env["GMAIL_APP_PASSWORD"])
         s.send_message(msg)
-    print(f"mailed {MAIL_TO}")
+    print("notification mail sent")
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--no-mail", action="store_true")
+    ap.add_argument("--push", action="store_true",
+                    help="git push origin main after committing (default: off)")
     args = ap.parse_args()
 
     today = date.today()
@@ -193,7 +203,7 @@ def main():
                         f"annual refresh: IMD final data through {year}\n\n"
                         "Co-Authored-By: annual_refresh.py (scheduled)"],
                        cwd=str(BASE), capture_output=True, text=True)
-    if r.returncode == 0:
+    if r.returncode == 0 and args.push:
         subprocess.run(["git", "push", "origin", "main"], cwd=str(BASE))
     marker.touch()
     print(f"done — marker {marker.name} written")
